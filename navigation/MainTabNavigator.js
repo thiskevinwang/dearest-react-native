@@ -1,60 +1,87 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from "react";
+import { Platform, View } from "react-native";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from "../components/TabBarIcon";
+import HomeScreen from "../screens/HomeScreen";
+import LinksScreen from "../screens/LinksScreen";
+import SearchScreen from "../screens/SearchScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: HomeScreen
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: "Home",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === "ios" ? "ios-home" : "md-home"}
     />
-  ),
+  )
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const SearchStack = createStackNavigator({
+  Links: SearchScreen
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+SearchStack.navigationOptions = {
+  tabBarLabel: "Search",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === "ios" ? "ios-search" : "md-search"}
     />
-  ),
+  )
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const SignupStack = createStackNavigator({
+  Signup: {
+    screen: LoginScreen,
+    navigationOptions: () => ({
+      title: `Sign up`,
+      headerBackTitle: "back"
+    })
+  }
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+SignupStack.navigationOptions = {
+  tabBarLabel: "Sign Up",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === "ios" ? "ios-person-add" : "md-person-add"}
     />
-  ),
+  )
+};
+
+const LoginStack = createStackNavigator({
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: () => ({
+      title: `Login`,
+      headerBackTitle: "back"
+    })
+  }
+});
+
+LoginStack.navigationOptions = {
+  tabBarLabel: "Login",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-person" : "md-person"}
+    />
+  )
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  SearchStack,
+  SignupStack,
+  LoginStack
 });
