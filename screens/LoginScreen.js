@@ -49,8 +49,13 @@ export default class LoginScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log(JSON.stringify(this.props.navigation));
+    // console.log(JSON.stringify(this.props.navigation));
   }
+
+  _signInAsync = async () => {
+    await AsyncStorage.setItem("userToken", "abc");
+    this.props.navigation.navigate("AuthLoading");
+  };
 
   render() {
     return (
@@ -72,7 +77,6 @@ export default class LoginScreen extends React.Component {
             icon={<Icon name="facebook" size={25} color="white" />}
           />
         </View>
-
         <View style={styles.marginBottom}>
           <Button
             raised
@@ -98,145 +102,99 @@ export default class LoginScreen extends React.Component {
           <Text style={{ color: GRAY, flex: 1, textAlign: "center" }}>OR</Text>
           <HR style={{ flex: 3 }} />
         </Row>
-        {/*
-          NOTE:
-          Conditionally render the next part based on routeName
-        */}
 
         {/* TODO: erorr feedback */}
-        {this.props.navigation.state.routeName == "Login" ? (
-          <>
-            <Row noGutters style={{ height: 70 }}>
-              <Input
-                name="email"
-                label={this.state.email ? "Email" : " "}
-                value={this.state.email}
-                placeholder="Email"
-                onChangeText={email => {
-                  this.setState({ email: email });
-                }}
-                containerStyle={{ paddingHorizontal: 0 }}
-                inputContainerStyle={{
-                  ...styles.marginBottom,
-                  borderColor: GRAY,
-                  borderWidth: 1,
-                  paddingLeft: 10
-                }}
-                autoCorrect={false}
-                autoCapitalize={false}
-              />
-            </Row>
 
-            {/* TODO: erorr feedback */}
-            <Row noGutters style={{ height: 70 }}>
-              <Input
-                name="password"
-                label={this.state.password ? "Password" : " "}
-                value={this.state.password}
-                placeholder="Password"
-                onChangeText={password => {
-                  this.setState({ password: password });
-                }}
-                containerStyle={{ paddingHorizontal: 0 }}
-                inputContainerStyle={{
-                  ...styles.marginBottom,
-                  borderColor: GRAY,
-                  borderWidth: 1,
-                  paddingLeft: 10
-                }}
-                autoCorrect={false}
-                autoCapitalize={false}
-              />
-            </Row>
+        <Row noGutters style={{ height: 70 }}>
+          <Input
+            name="email"
+            label={this.state.email ? "Email" : " "}
+            value={this.state.email}
+            placeholder="Email"
+            onChangeText={email => {
+              this.setState({ email: email });
+            }}
+            containerStyle={{ paddingHorizontal: 0 }}
+            inputContainerStyle={{
+              ...styles.marginBottom,
+              borderColor: GRAY,
+              borderWidth: 1,
+              paddingLeft: 10
+            }}
+            autoCorrect={false}
+            autoCapitalize={false}
+          />
+        </Row>
 
-            {/* Remember me | Forgot Password? */}
-            <Row noGutters style={{ alignItems: "center" }}>
-              <CheckBox
-                title="Remember me"
-                checked={this.state.checked}
-                onPress={() => this.setState({ checked: !this.state.checked })}
-                containerStyle={{
-                  backgroundColor: "none",
-                  borderWidth: 0,
-                  flex: 1,
-                  paddingHorizontal: 0,
-                  marginHorizontal: 0
-                }}
-                textStyle={{ fontWeight: "100", marginLeft: 0 }}
-              />
-              <Button
-                type="clear"
-                title="Forgot password?"
-                titleStyle={{ color: ORANGE, fontSize: 16 }}
-              />
-            </Row>
+        {/* TODO: erorr feedback */}
+        <Row noGutters style={{ height: 70 }}>
+          <Input
+            name="password"
+            label={this.state.password ? "Password" : " "}
+            value={this.state.password}
+            placeholder="Password"
+            onChangeText={password => {
+              this.setState({ password: password });
+            }}
+            containerStyle={{ paddingHorizontal: 0 }}
+            inputContainerStyle={{
+              ...styles.marginBottom,
+              borderColor: GRAY,
+              borderWidth: 1,
+              paddingLeft: 10
+            }}
+            autoCorrect={false}
+            autoCapitalize={false}
+          />
+        </Row>
 
-            <Button
-              raised
-              onPress={null}
-              title=" Log in"
-              buttonStyle={{
-                paddingLeft: 0,
-                backgroundColor: ORANGE,
-                borderRadius: 0,
-                height: 60
-              }}
-            />
+        {/* Remember me | Forgot Password? */}
+        <Row noGutters style={{ alignItems: "center" }}>
+          <CheckBox
+            title="Remember me"
+            checked={this.state.checked}
+            onPress={() => this.setState({ checked: !this.state.checked })}
+            containerStyle={{
+              backgroundColor: "none",
+              borderWidth: 0,
+              flex: 1,
+              paddingHorizontal: 0,
+              marginHorizontal: 0
+            }}
+            textStyle={{ fontWeight: "100", marginLeft: 0 }}
+          />
+          <Button
+            type="clear"
+            title="Forgot password?"
+            titleStyle={{ color: ORANGE, fontSize: 16 }}
+          />
+        </Row>
 
-            <Row
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginVertical: 20
-              }}
-            >
-              <Text style={{ letterSpacing: 1 }}>
-                Don't have an account?{" "}
-                <Text style={{ color: ORANGE }}>Sign up</Text>
-              </Text>
-            </Row>
-          </>
-        ) : (
-          <>
-            <Button
-              raised
-              onPress={null}
-              title=" Sign up with Email"
-              buttonStyle={{
-                paddingLeft: 0,
-                backgroundColor: ORANGE,
-                borderRadius: 0,
-                height: 60
-              }}
-              icon={<Icon name="mail" type="ionicon" size={25} color="white" />}
-              containerStyle={styles.marginBottom}
-            />
+        {/* BOOT STRAP LOGIN */}
+        <Button
+          raised
+          onPress={() => this._signInAsync()}
+          title=" Log in"
+          buttonStyle={{
+            paddingLeft: 0,
+            backgroundColor: ORANGE,
+            borderRadius: 0,
+            height: 60
+          }}
+        />
 
-            <Row noGutters>
-              <Text style={{ letterSpacing: 0.6 }}>
-                By creating an account, you agree to our{" "}
-                <Text onPress={null} style={{ color: ORANGE }}>
-                  Terms of Use
-                </Text>{" "}
-                and <Text style={{ color: ORANGE }}>Privacy Policy</Text>, and
-                to receive marketing communications from Dearest.
-              </Text>
-            </Row>
-
-            <Row
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginVertical: 20
-              }}
-            >
-              <Text style={{ letterSpacing: 1 }}>
-                Already have an account?{" "}
-                <Text style={{ color: ORANGE }}>Log in</Text>
-              </Text>
-            </Row>
-          </>
-        )}
+        <Row
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            marginVertical: 20
+          }}
+        >
+          <Text style={{ letterSpacing: 1 }}>
+            Don't have an account?{" "}
+            <Text style={{ color: ORANGE }}>Sign up</Text>
+          </Text>
+        </Row>
       </View>
     );
   }
