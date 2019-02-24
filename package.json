@@ -16,6 +16,8 @@
     "apollo-client-preset": "^1.0.8",
     "apollo-link-context": "^1.0.14",
     "expo": "^32.0.0",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
     "ionicons": "^4.5.5",
     "prop-types": "^15.7.2",
     "react": "16.5.1",
