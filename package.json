@@ -13,8 +13,12 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
+    "apollo-boost": "^0.3.0",
+    "apollo-cache-inmemory": "^1.5.0",
+    "apollo-client": "^2.5.0",
     "apollo-client-preset": "^1.0.8",
     "apollo-link-context": "^1.0.14",
+    "apollo-link-http": "^1.5.11",
     "expo": "^32.0.0",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
