@@ -1,6 +1,6 @@
 // Row Component
 // props.children need to specify a flex style value
-
+//@flow
 import React from "react";
 import PropTypes from "prop-types";
 import { View, Text, StyleSheet } from "react-native";
