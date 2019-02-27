@@ -10,6 +10,7 @@ import HomeScreen from "../screens/HomeScreen";
 import LinksScreen from "../screens/LinksScreen";
 import SearchScreen from "../screens/SearchScreen";
 import LoginScreen from "../screens/LoginScreen";
+import SignupScreen from "../screens/SignupScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -41,7 +42,7 @@ SearchStack.navigationOptions = {
 
 const SignupStack = createStackNavigator({
   Signup: {
-    screen: LoginScreen,
+    screen: SignupScreen,
     navigationOptions: () => ({
       title: `Sign up`,
       headerBackTitle: "back"
