@@ -1,10 +1,8 @@
 // LoginScreen Component
-// OR
-// SignUp, depending on this.props.navigation.state.routeName
 
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, AsyncStorage } from "react-native";
 import { Button, Input, CheckBox } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Row from "../components/Row";
@@ -115,7 +113,7 @@ export default class LoginScreen extends React.Component {
               borderRadius: 0,
               height: 60
             }}
-            icon={<Icon name="mail" type="ionicon" size={25} color="white" />}
+            icon={<Icon name="envelope" size={25} color="white" />}
             containerStyle={styles.marginBottom}
           />
 

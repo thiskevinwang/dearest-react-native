@@ -1,7 +1,9 @@
+// DashboardScreen Component
+
 import React from "react";
-import { StyleSheet } from "react-native";
+import PropTypes from "prop-types";
+import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
-import { createDrawerNavigator } from "react-navigation";
 
 // Components
 import Row from "../components/Row";
@@ -42,17 +44,36 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class SearchScreen extends React.Component {
-  static navigationOptions = {
-    title: "Search"
+export default class DashboardScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  static navigationOptions = {};
+
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("Home");
   };
 
   render() {
     return (
-      <Button
-        onPress={() => this.props.navigation.navigate("Notifications")}
-        title="Go to notifications"
-      />
+      <View style={styles.pageContainer}>
+        <Row>
+          <Text style={{ ...styles.textBody, flex: 1, textAlign: "center" }}>
+            LITTLE ONE'S PROGRESS
+          </Text>
+        </Row>
+        <Button
+          title="Go to Home"
+          onPress={() => this.props.navigation.navigate("Home")}
+        />
+      </View>
     );
   }
 }
+
+DashboardScreen.propTypes = {
+  children: PropTypes.node,
+  style: PropTypes.object
+};

@@ -1,13 +1,13 @@
 // LoginScreen Component
-// OR
-// SignUp, depending on this.props.navigation.state.routeName
+//@flow
 
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, AsyncStorage } from "react-native";
 import { Button, Input, CheckBox } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Row from "../components/Row";
+import gql from "graphql-tag";
 
 const FACEBOOKBG = "#3b5998";
 const LINKEDINBG = "#008bc2";
@@ -34,6 +34,21 @@ const styles = StyleSheet.create({
   marginBottom: { marginBottom: 15 }
 });
 
+// const query = gql`
+//   query {
+//     getDearestUserLoginCredentials(username: 'trungdoestasks@gmail.com'){
+//       _id
+//       username
+//       password
+//       email_verified
+//       mobile_verified
+//       is_first_logged_in
+//       parent_id
+//       provider_id
+//       register_type
+//     }
+//   }`;
+
 export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -53,8 +68,33 @@ export default class LoginScreen extends React.Component {
   }
 
   _signInAsync = async () => {
-    await AsyncStorage.setItem("userToken", "abc");
-    this.props.navigation.navigate("AuthLoading");
+    await AsyncStorage.setItem("userToken", this.state.email, () => {
+      console.log(AsyncStorage.getItem("userToken"));
+    });
+    this.props.navigation.navigate("Account");
+  };
+
+  fetchQuery = async query => {
+    return await fetch("http://www.dearest.io/graphql", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTUzOTNjZTQ5YmEwYmNmMWNmMWUzYWIiLCJ1c2VybmFtZSI6InRydW5nLnRydW1hbi50cmFuQGdtYWlsLmNvbV90ZXN0IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJtb2JpbGVfdmVyaWZpZWQiOnRydWUsImlzX2ZpcnN0X2xvZ2dlZF9pbiI6ZmFsc2UsInBhcmVudF9pZCI6IjVhNTM5M2NlNDliYTBiY2YxY2YxZTNhYyIsInByb3ZpZGVyX2lkIjpudWxsLCJyZWdpc3Rlcl90eXBlIjoxLCJpc0ZpcnN0VGltZSI6ZmFsc2UsImlhdCI6MTUyOTk1NzA0OSwiZXhwIjo0MTIxOTU3MDQ5fQ.TZl9dR0AZATmEiCEMXEeQrD2xO6sXyZajFY-jlKA6ZM"
+      },
+      body: JSON.stringify({
+        query: query
+      }),
+      credentials: "include"
+    })
+      .then(response => {
+        console.log(response);
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   };
 
   render() {
@@ -63,12 +103,8 @@ export default class LoginScreen extends React.Component {
         <View style={styles.marginBottom}>
           <Button
             raised
-            onPress={null}
-            title={
-              this.props.navigation.state.routeName == "Login"
-                ? " Log in with Facebook"
-                : " Sign up with Facebook"
-            }
+            onPress={this._signInAsync}
+            title={" Log in with Facebook"}
             buttonStyle={{
               backgroundColor: FACEBOOKBG,
               borderRadius: 0,
@@ -81,11 +117,7 @@ export default class LoginScreen extends React.Component {
           <Button
             raised
             onPress={null}
-            title={
-              this.props.navigation.state.routeName == "Login"
-                ? " Log in with LinkedIn"
-                : " Sign up with LinkedIn"
-            }
+            title={" Log in with LinkedIn"}
             buttonStyle={{
               backgroundColor: LINKEDINBG,
               borderRadius: 0,
@@ -173,7 +205,7 @@ export default class LoginScreen extends React.Component {
         {/* BOOT STRAP LOGIN */}
         <Button
           raised
-          onPress={() => this._signInAsync()}
+          onPress={this._signInAsync}
           title=" Log in"
           buttonStyle={{
             paddingLeft: 0,

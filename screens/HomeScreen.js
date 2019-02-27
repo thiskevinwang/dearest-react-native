@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions
+  Dimensions,
+  AsyncStorage
 } from "react-native";
 import { WebBrowser } from "expo";
 
@@ -22,9 +23,35 @@ import AfterschoolProgram from "../components/pages/AfterschoolProgram";
 
 const { width, height } = Dimensions.get("window");
 
+let pkg = require("../package.json");
+
 export default class HomeScreen extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      userToken: ""
+    };
+  }
+
   static navigationOptions = {
     header: null
+  };
+
+  componentDidMount() {
+    this._retrieveData();
+  }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("userToken");
+      if (value !== null) {
+        this.setState({ userToken: value });
+        console.log(value);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
@@ -40,6 +67,9 @@ export default class HomeScreen extends React.Component {
               style={styles.welcomeImage}
             />
           </View>
+          <Text style={{ textAlign: "center" }}>
+            {this.state.userToken || "_"} | Ver. {pkg.version}
+          </Text>
 
           {/* <Row style={{ paddingHorizontal: 0 }}>
             <Image
