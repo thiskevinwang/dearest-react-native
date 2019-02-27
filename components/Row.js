@@ -5,13 +5,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { View, Text, StyleSheet } from "react-native";
 
+type Props = {
+  noGutters: boolean,
+  style: {},
+  children: []
+};
+
+type State = {};
+
 const styles = StyleSheet.create({
   row: { flexDirection: "row", paddingHorizontal: 15 },
   rowNoGutters: { flexDirection: "row" }
 });
 
-export default class Row extends React.Component {
-  constructor(props) {
+export default class Row extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
   }
 
@@ -29,8 +37,8 @@ export default class Row extends React.Component {
   }
 }
 
-Row.propTypes = {
-  children: PropTypes.node,
-  style: PropTypes.object,
-  noGutters: PropTypes.bool
-};
+// Row.propTypes = {
+//   children: PropTypes.node,
+//   style: PropTypes.object,
+//   noGutters: PropTypes.bool
+// };
