@@ -111,7 +111,7 @@ export default class ProfileScreen extends React.Component<Props, State> {
               // activeColor={{ color: "black" }}
               // inactiveColor={LIGHTGRAY}
               indicatorStyle={{ backgroundColor: "white", height: 50 }}
-              style={{ backgroundColor: LIGHTGRAY, borderBottomWidth: 0 o}}
+              style={{ backgroundColor: LIGHTGRAY, borderBottomWidth: 0 }}
               labelStyle={{ color: "black" }}
               bounces
             />
