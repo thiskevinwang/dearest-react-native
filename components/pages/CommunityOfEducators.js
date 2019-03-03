@@ -28,6 +28,10 @@ const STANFORD = require("../../assets/dearest/university/stanford.png");
 const CORNELL = require("../../assets/dearest/university/cornell.png");
 
 export default function CommunityOfEducators() {
+  const renderEducatorSquare = source => (
+    <Image source={source} style={styles.educatorSquare} />
+  );
+
   return (
     <View style={[styles.pageContainer, { backgroundColor: GRAY }]}>
       <Row>
@@ -90,19 +94,19 @@ export default function CommunityOfEducators() {
 
       {/* TODO: Clickable Image Grid */}
       <Row>
-        <Image source={JOLISA} style={styles.educatorSquare} />
-        <Image source={IJUNG} style={styles.educatorSquare} />
-        <Image source={YORLENY} style={styles.educatorSquare} />
+        {renderEducatorSquare(JOLISA)}
+        {renderEducatorSquare(IJUNG)}
+        {renderEducatorSquare(YORLENY)}
       </Row>
       <Row>
-        <Image source={STEPHANIE} style={styles.educatorSquare} />
-        <Image source={REBECCA} style={styles.educatorSquare} />
-        <Image source={STEPHANIEJ} style={styles.educatorSquare} />
+        {renderEducatorSquare(STEPHANIE)}
+        {renderEducatorSquare(REBECCA)}
+        {renderEducatorSquare(STEPHANIEJ)}
       </Row>
       <Row style={{ paddingBottom: 25 }}>
-        <Image source={ASIYE} style={styles.educatorSquare} />
-        <Image source={AMANDA} style={styles.educatorSquare} />
-        <Image source={AKUA} style={styles.educatorSquare} />
+        {renderEducatorSquare(ASIYE)}
+        {renderEducatorSquare(AMANDA)}
+        {renderEducatorSquare(AKUA)}
       </Row>
 
       {/* Univerity Banners */}
