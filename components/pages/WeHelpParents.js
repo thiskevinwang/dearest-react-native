@@ -1,47 +1,12 @@
 // WeHelpParents Component
+// @flow
 
 import React from "react";
-import PropTypes from "prop-types";
 import { View, Text, Image, StyleSheet } from "react-native";
 import Row from "../Row";
+import { ORANGE } from "../../constants/Colors";
 
-const ORANGE = "#fc9038";
-
-const styles = StyleSheet.create({
-  pageContainer: {
-    paddingVertical: 50
-  },
-  textHeader: {
-    fontSize: 34,
-    fontWeight: "200",
-    letterSpacing: 2,
-    marginBottom: 30,
-    marginLeft: 3.8,
-    marginRight: 13.8,
-    textAlign: "auto"
-  },
-  textBody: {
-    fontSize: 16,
-    fontWeight: "100",
-    letterSpacing: 1,
-    lineHeight: 23,
-    marginBottom: 30,
-    marginLeft: 3.8,
-    // marginRight: 13.8,
-    textAlign: "auto"
-  },
-  descriptionHeader: {
-    fontSize: 16,
-    fontWeight: "bold",
-    letterSpacing: 1.5
-  },
-  descriptionBody: {
-    fontSize: 16,
-    fontWeight: "100",
-    letterSpacing: 1.2,
-    marginBottom: 30
-  }
-});
+// TODO: refactor styles
 
 export default function WeHelpParents() {
   return (
@@ -134,7 +99,38 @@ export default function WeHelpParents() {
   );
 }
 
-// WeHelpParents.propTypes = {
-//   children: PropTypes.node,
-//   style: PropTypes.object
-// };
+const styles = StyleSheet.create({
+  pageContainer: {
+    paddingVertical: 50
+  },
+  textHeader: {
+    fontSize: 34,
+    fontWeight: "200",
+    letterSpacing: 2,
+    marginBottom: 30,
+    marginLeft: 3.8,
+    marginRight: 13.8,
+    textAlign: "auto"
+  },
+  textBody: {
+    fontSize: 16,
+    fontWeight: "100",
+    letterSpacing: 1,
+    lineHeight: 23,
+    marginBottom: 30,
+    marginLeft: 3.8,
+    // marginRight: 13.8,
+    textAlign: "auto"
+  },
+  descriptionHeader: {
+    fontSize: 16,
+    fontWeight: "bold",
+    letterSpacing: 1.5
+  },
+  descriptionBody: {
+    fontSize: 16,
+    fontWeight: "100",
+    letterSpacing: 1.2,
+    marginBottom: 30
+  }
+});

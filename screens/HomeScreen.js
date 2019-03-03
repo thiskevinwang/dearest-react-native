@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import {
   Image,
@@ -10,7 +12,7 @@ import {
   Dimensions,
   AsyncStorage
 } from "react-native";
-import { WebBrowser } from "expo";
+// import { WebBrowser } from "expo";
 
 // Components
 import Row from "../components/Row";
@@ -25,36 +27,52 @@ const { width, height } = Dimensions.get("window");
 
 let pkg = require("../package.json");
 
-export default class HomeScreen extends React.Component {
+type State = {
+  token: string
+};
+
+export default class HomeScreen extends React.Component<null, State> {
   constructor() {
+    console.log("Home CONSTRUCTOR");
     super();
 
     this.state = {
-      userToken: ""
+      token: "",
+      email: "",
+      name: ""
     };
   }
 
   static navigationOptions = {
     header: null
   };
-
+  componentWillMount() {
+    console.log("Home WILL mount");
+  }
   componentDidMount() {
+    console.log("Home DID mount");
     this._retrieveData();
+  }
+  componentWillUnmount() {
+    console.log("Home will UNMOUNT");
   }
 
   _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem("userToken");
-      if (value !== null) {
-        this.setState({ userToken: value });
-        console.log(value);
+      const token = await AsyncStorage.getItem("token");
+      const email = await AsyncStorage.getItem("email");
+      const name = await AsyncStorage.getItem("name");
+      if (token !== null) {
+        this.setState({ token, email, name });
+        // console.log(token);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
   render() {
+    console.log("Home RENDER");
     return (
       <View style={styles.container}>
         <ScrollView
@@ -67,16 +85,19 @@ export default class HomeScreen extends React.Component {
               style={styles.welcomeImage}
             />
           </View>
-          <Text style={{ textAlign: "center" }}>
-            {this.state.userToken || "_"} | Ver. {pkg.version}
-          </Text>
 
-          {/* <Row style={{ paddingHorizontal: 0 }}>
+          <Text style={{ textAlign: "center" }}>
+            {this.state.email || "Not Signed In"}{" "}
+            {("_ " && this.state.name) || ""}
+          </Text>
+          <Text style={{ textAlign: "center" }}>ver. {pkg.version}</Text>
+
+          <Row style={{ paddingHorizontal: 0 }}>
             <Image
               source={require("../assets/dearest/home_15.jpg")}
               style={{ flex: 1, aspectRatio: 4 / 3 }}
             />
-          </Row> */}
+          </Row>
 
           {/* PAGES */}
           <WeHelpParents />
@@ -110,16 +131,6 @@ export default class HomeScreen extends React.Component {
       );
     }
   }
-
-  _handleLearnMorePress = () => {
-    // WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    // WebBrowser.openBrowserAsync(
-    //   'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    // );
-  };
 }
 
 const styles = StyleSheet.create({

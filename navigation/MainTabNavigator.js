@@ -4,6 +4,7 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
+import { ORANGE } from "../constants/Colors";
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
@@ -11,6 +12,7 @@ import LinksScreen from "../screens/LinksScreen";
 import SearchScreen from "../screens/SearchScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -60,12 +62,15 @@ SignupStack.navigationOptions = {
   )
 };
 
+const LoginOrProfile = props => {
+  return props.navigation.state.params ? LoginScreen : LoginScreen;
+};
+
 const LoginStack = createStackNavigator({
   Login: {
     screen: LoginScreen,
     navigationOptions: () => ({
-      title: `Login`,
-      headerBackTitle: "back"
+      title: `Login`
     })
   }
 });
@@ -80,9 +85,16 @@ LoginStack.navigationOptions = {
   )
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  SearchStack,
-  SignupStack,
-  LoginStack
-});
+// createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
+export default createBottomTabNavigator(
+  {
+    HomeStack,
+    SearchStack,
+    SignupStack,
+    LoginStack
+  },
+  {
+    // NOTE: Edit initialRouteName for ease during development
+    initialRouteName: "HomeStack"
+  }
+);

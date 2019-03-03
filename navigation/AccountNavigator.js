@@ -67,7 +67,11 @@ ProfileStack.navigationOptions = {
 //   )
 // };
 
-export default createBottomTabNavigator({
-  DashboardStack,
-  ProfileStack
-});
+// NOTE: Update initialRouteName for ease during Development
+export default createBottomTabNavigator(
+  {
+    DashboardStack,
+    ProfileStack
+  },
+  { initialRouteName: "ProfileStack" }
+);
