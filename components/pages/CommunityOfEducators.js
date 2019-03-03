@@ -24,10 +24,12 @@ const E3 = [ASIYE, AKUA, AMANDA];
 const TCL = require("../../assets/dearest/university/tcl.png");
 const HUNTER = require("../../assets/dearest/university/hunter.png");
 const BANKSTREET = require("../../assets/dearest/university/bankStreet.png");
-
 const JUILLIARD = require("../../assets/dearest/university/juilliard.png");
 const STANFORD = require("../../assets/dearest/university/stanford.png");
 const CORNELL = require("../../assets/dearest/university/cornell.png");
+
+const S1 = [TCL, HUNTER, BANKSTREET];
+const S2 = [JUILLIARD, STANFORD, CORNELL];
 
 export default function CommunityOfEducators() {
   const renderEducatorSquare = (source, index) => (
@@ -37,6 +39,18 @@ export default function CommunityOfEducators() {
   const renderEducatorRow = array => {
     return (
       <Row>{array.map((each, index) => renderEducatorSquare(each, index))}</Row>
+    );
+  };
+
+  const renderSchoolLogo = (source, index) => (
+    <View style={{ flex: 1, aspectRatio: 6 }} key={index}>
+      <Image source={source} style={styles.universityLogo} />
+    </View>
+  );
+
+  const renderSchoolRow = array => {
+    return (
+      <Row>{array.map((each, index) => renderSchoolLogo(each, index))}</Row>
     );
   };
 
@@ -108,29 +122,8 @@ export default function CommunityOfEducators() {
       <Row style={{ paddingBottom: 25 }} />
 
       {/* Univerity Banners */}
-      <Row>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={TCL} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={HUNTER} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={BANKSTREET} style={styles.universityLogo} />
-        </View>
-      </Row>
-
-      <Row>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={JUILLIARD} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={STANFORD} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={CORNELL} style={styles.universityLogo} />
-        </View>
-      </Row>
+      {renderSchoolRow(S1)}
+      {renderSchoolRow(S2)}
     </View>
   );
 }
