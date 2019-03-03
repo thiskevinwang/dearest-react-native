@@ -10,24 +10,50 @@ import { GRAY } from "../../constants/Colors";
 const JOLISA = require("../../assets/dearest/jolisa-square.jpg");
 const IJUNG = require("../../assets/dearest/ijung-square.jpg");
 const YORLENY = require("../../assets/dearest/yorleny-square.jpg");
-
 const STEPHANIE = require("../../assets/dearest/stephanie-square.jpg");
 const REBECCA = require("../../assets/dearest/rebecca-square.jpg");
 const STEPHANIEJ = require("../../assets/dearest/stephaniej-square.jpg");
-
 const ASIYE = require("../../assets/dearest/asiye-square.jpg");
 const AKUA = require("../../assets/dearest/akua-square.jpg");
 const AMANDA = require("../../assets/dearest/amanda-square.jpg");
 
+const E1 = [JOLISA, IJUNG, YORLENY];
+const E2 = [STEPHANIE, REBECCA, STEPHANIEJ];
+const E3 = [ASIYE, AKUA, AMANDA];
+
 const TCL = require("../../assets/dearest/university/tcl.png");
 const HUNTER = require("../../assets/dearest/university/hunter.png");
 const BANKSTREET = require("../../assets/dearest/university/bankStreet.png");
-
 const JUILLIARD = require("../../assets/dearest/university/juilliard.png");
 const STANFORD = require("../../assets/dearest/university/stanford.png");
 const CORNELL = require("../../assets/dearest/university/cornell.png");
 
+const S1 = [TCL, HUNTER, BANKSTREET];
+const S2 = [JUILLIARD, STANFORD, CORNELL];
+
 export default function CommunityOfEducators() {
+  const renderEducatorSquare = (source, index) => (
+    <Image source={source} style={styles.educatorSquare} key={index} />
+  );
+
+  const renderEducatorRow = array => {
+    return (
+      <Row>{array.map((each, index) => renderEducatorSquare(each, index))}</Row>
+    );
+  };
+
+  const renderSchoolLogo = (source, index) => (
+    <View style={{ flex: 1, aspectRatio: 6 }} key={index}>
+      <Image source={source} style={styles.universityLogo} />
+    </View>
+  );
+
+  const renderSchoolRow = array => {
+    return (
+      <Row>{array.map((each, index) => renderSchoolLogo(each, index))}</Row>
+    );
+  };
+
   return (
     <View style={[styles.pageContainer, { backgroundColor: GRAY }]}>
       <Row>
@@ -89,46 +115,15 @@ export default function CommunityOfEducators() {
       </Row>
 
       {/* TODO: Clickable Image Grid */}
-      <Row>
-        <Image source={JOLISA} style={styles.educatorSquare} />
-        <Image source={IJUNG} style={styles.educatorSquare} />
-        <Image source={YORLENY} style={styles.educatorSquare} />
-      </Row>
-      <Row>
-        <Image source={STEPHANIE} style={styles.educatorSquare} />
-        <Image source={REBECCA} style={styles.educatorSquare} />
-        <Image source={STEPHANIEJ} style={styles.educatorSquare} />
-      </Row>
-      <Row style={{ paddingBottom: 25 }}>
-        <Image source={ASIYE} style={styles.educatorSquare} />
-        <Image source={AMANDA} style={styles.educatorSquare} />
-        <Image source={AKUA} style={styles.educatorSquare} />
-      </Row>
+      {renderEducatorRow(E1)}
+      {renderEducatorRow(E2)}
+      {renderEducatorRow(E3)}
+
+      <Row style={{ paddingBottom: 25 }} />
 
       {/* Univerity Banners */}
-      <Row>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={TCL} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={HUNTER} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={BANKSTREET} style={styles.universityLogo} />
-        </View>
-      </Row>
-
-      <Row>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={JUILLIARD} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={STANFORD} style={styles.universityLogo} />
-        </View>
-        <View style={{ flex: 1, aspectRatio: 6 }}>
-          <Image source={CORNELL} style={styles.universityLogo} />
-        </View>
-      </Row>
+      {renderSchoolRow(S1)}
+      {renderSchoolRow(S2)}
     </View>
   );
 }
