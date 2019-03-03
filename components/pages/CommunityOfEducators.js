@@ -2,11 +2,10 @@
 // @flow
 
 import React from "react";
-import PropTypes from "prop-types";
 import { View, Text, Image, StyleSheet } from "react-native";
 import Row from "../Row";
-
-const GRAY = "#f1f1f1";
+import { GRAY } from "../../constants/Colors";
+// const GRAY = "#f1f1f1";
 
 const JOLISA = require("../../assets/dearest/jolisa-square.jpg");
 const IJUNG = require("../../assets/dearest/ijung-square.jpg");
@@ -27,49 +26,6 @@ const BANKSTREET = require("../../assets/dearest/university/bankStreet.png");
 const JUILLIARD = require("../../assets/dearest/university/juilliard.png");
 const STANFORD = require("../../assets/dearest/university/stanford.png");
 const CORNELL = require("../../assets/dearest/university/cornell.png");
-
-const styles = StyleSheet.create({
-  pageContainer: {
-    paddingVertical: 50
-  },
-  textHeader: {
-    fontSize: 22,
-    fontWeight: "200",
-    letterSpacing: 2,
-    marginBottom: 30,
-    marginLeft: 3.8,
-    marginRight: 13.8,
-    paddingLeft: 20,
-    textAlign: "auto"
-  },
-  textBody: {
-    fontSize: 16,
-    fontWeight: "100",
-    letterSpacing: 1,
-    lineHeight: 23,
-    marginBottom: 30,
-    marginLeft: 3.8,
-    textAlign: "auto"
-  },
-  descriptionHeader: {
-    fontSize: 16,
-    fontWeight: "bold",
-    letterSpacing: 1.5
-  },
-  descriptionBody: {
-    fontSize: 16,
-    fontWeight: "100",
-    letterSpacing: 1.2,
-    marginBottom: 30
-  },
-  educatorSquare: { flex: 1, aspectRatio: 1 },
-  universityLogo: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: "contain"
-  }
-});
 
 export default function CommunityOfEducators() {
   return (
@@ -177,7 +133,45 @@ export default function CommunityOfEducators() {
   );
 }
 
-// CommunityOfEducators.propTypes = {
-//   children: PropTypes.node,
-//   style: PropTypes.object
-// };
+const styles = StyleSheet.create({
+  pageContainer: {
+    paddingVertical: 50
+  },
+  textHeader: {
+    fontSize: 22,
+    fontWeight: "200",
+    letterSpacing: 2,
+    marginBottom: 30,
+    marginLeft: 3.8,
+    marginRight: 13.8,
+    paddingLeft: 20,
+    textAlign: "auto"
+  },
+  textBody: {
+    fontSize: 16,
+    fontWeight: "100",
+    letterSpacing: 1,
+    lineHeight: 23,
+    marginBottom: 30,
+    marginLeft: 3.8,
+    textAlign: "auto"
+  },
+  descriptionHeader: {
+    fontSize: 16,
+    fontWeight: "bold",
+    letterSpacing: 1.5
+  },
+  descriptionBody: {
+    fontSize: 16,
+    fontWeight: "100",
+    letterSpacing: 1.2,
+    marginBottom: 30
+  },
+  educatorSquare: { flex: 1, aspectRatio: 1 },
+  universityLogo: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: "contain"
+  }
+});
