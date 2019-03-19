@@ -21,7 +21,7 @@ import { setContext } from "apollo-link-context";
   NOTE: The GraphQL API endpoint to send queries/mutations
 */
 
-const URI = "https://graphql-server-example-1.herokuapp.com/";
+const URI = "https://graphql-guestbook.herokuapp.com/";
 const httpLink = new HttpLink({ uri: URI });
 
 const authLink = setContext((_, { headers }) => {
